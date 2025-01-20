@@ -1,0 +1,21 @@
+ManifestFileVersion: 0
+CRC: 2150768984
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 83d4a21ce0cc474d39030182b04ecaba
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 0df1dec30b5d061d422d3e6493d27647
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: 83d4a21ce0cc474d39030182b04ecaba
+HashAppended: 0
+ClassTypes:
+- Class: 48
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Learn/ShaderTest/Shader/FirrstUnlitShader.shader
+Dependencies:
+- D:/UnityWork/Test/Bundles/StandaloneWindows64/FirstPackage/OutputCache/firstpackage_assets_res_model_texture.bundle

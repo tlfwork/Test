@@ -1,0 +1,23 @@
+ManifestFileVersion: 0
+CRC: 1490754697
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 0900bdad1c7d7a8068b284d73979f60b
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 5ad585dd02dfb5016c0dad519eab8f49
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: 0900bdad1c7d7a8068b284d73979f60b
+HashAppended: 0
+ClassTypes:
+- Class: 49
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Res/Codes/MetaData/System.dll.bytes
+- Assets/Res/Codes/MetaData/System.Core.dll.bytes
+- Assets/Res/Codes/MetaData/UnityEngine.dll.bytes
+- Assets/Res/Codes/MetaData/mscorlib.dll.bytes
+Dependencies: []

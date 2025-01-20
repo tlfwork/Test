@@ -1,0 +1,31 @@
+ManifestFileVersion: 0
+CRC: 1131503968
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 143a45e66e5d118e663953c346fa1698
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: b30fce1a9ad74efb72be6c308c56e365
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: 143a45e66e5d118e663953c346fa1698
+HashAppended: 0
+ClassTypes:
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Res/Model/Mat/100.mat
+- "Assets/Res/Model/Mat/\u8863\u670D\u7EA2\u8272\u6750\u8D28.mat"
+- "Assets/Res/Model/Mat/\u7EA2\u8272.mat"
+- "Assets/Res/Model/Mat/\u84DD\u8272\u56FE\u6807\u8D34\u56FE.mat"
+- "Assets/Res/Model/Mat/\u9ED8\u8BA4.mat"
+- "Assets/Res/Model/Mat/\u9ED8\u8BA4\u6750\u8D28.mat"
+Dependencies:
+- D:/UnityWork/Test/Bundles/StandaloneWindows64/FirstPackage/OutputCache/firstpackage_assets_res_model_texture.bundle
+- D:/UnityWork/Test/Bundles/StandaloneWindows64/FirstPackage/OutputCache/firstpackage_share_assets_learn_shadertest_shader.bundle

@@ -1,0 +1,28 @@
+ManifestFileVersion: 0
+CRC: 3048143672
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 2920ba22eb21027844b1ff3fefbc6812
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 1bc71b667be21e1da7e8d6f1d3694f2e
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: 2920ba22eb21027844b1ff3fefbc6812
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Res/Model/Anim/HumanOne_Animation.fbx
+- Assets/Res/Model/Anim/HumanOne_Animt.controller
+Dependencies:
+- D:/UnityWork/Test/Bundles/StandaloneWindows64/FirstPackage/OutputCache/firstpackage_assets_res_model_mesh.bundle

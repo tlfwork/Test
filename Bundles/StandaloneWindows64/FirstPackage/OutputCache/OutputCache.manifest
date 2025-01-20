@@ -1,0 +1,55 @@
+ManifestFileVersion: 0
+CRC: 3003857064
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: firstpackage_assets_res_ui.bundle
+      Dependencies: {}
+    Info_1:
+      Name: firstpackage_assets_res_scene_scene_one.bundle
+      Dependencies: {}
+    Info_2:
+      Name: firstpackage_assets_res_scene_scene_two.bundle
+      Dependencies: {}
+    Info_3:
+      Name: firstpackage_assets_res_increasemodel.bundle
+      Dependencies: {}
+    Info_4:
+      Name: firstpackage_assets_res_uiatlas.bundle
+      Dependencies: {}
+    Info_5:
+      Name: firstpackage_assets_res_codes.bundle
+      Dependencies: {}
+    Info_6:
+      Name: firstpackage_assets_res_codes_metadata.bundle
+      Dependencies: {}
+    Info_7:
+      Name: firstpackage_assets_res_codes_thirdpartydll.bundle
+      Dependencies: {}
+    Info_8:
+      Name: firstpackage_assets_res_model_anim.bundle
+      Dependencies:
+        Dependency_0: firstpackage_assets_res_model_mesh.bundle
+    Info_9:
+      Name: firstpackage_assets_res_model_mat.bundle
+      Dependencies:
+        Dependency_0: firstpackage_assets_res_model_texture.bundle
+        Dependency_1: firstpackage_share_assets_learn_shadertest_shader.bundle
+    Info_10:
+      Name: firstpackage_assets_res_model_mesh.bundle
+      Dependencies:
+        Dependency_0: firstpackage_assets_res_model_mat.bundle
+    Info_11:
+      Name: firstpackage_assets_res_model_prefab.bundle
+      Dependencies:
+        Dependency_0: firstpackage_assets_res_model_mesh.bundle
+    Info_12:
+      Name: firstpackage_assets_res_model_shader.bundle
+      Dependencies: {}
+    Info_13:
+      Name: firstpackage_assets_res_model_texture.bundle
+      Dependencies: {}
+    Info_14:
+      Name: firstpackage_share_assets_learn_shadertest_shader.bundle
+      Dependencies:
+        Dependency_0: firstpackage_assets_res_model_texture.bundle
