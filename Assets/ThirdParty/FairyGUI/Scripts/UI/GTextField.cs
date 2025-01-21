@@ -11,9 +11,13 @@ namespace FairyGUI
     public class GTextField : GObject, ITextColorGear
     {
         protected TextField _textField;
+
         protected string _text;
+
         protected bool _ubbEnabled;
+
         protected bool _updatingSize;
+
         protected Dictionary<string, string> _templateVars;
 
         public GTextField()
@@ -47,16 +51,24 @@ namespace FairyGUI
             get
             {
                 if (this is GTextInput)
+
                     _text = ((GTextInput)this).inputTextField.text;
+
                 return _text;
             }
+
             set
             {
                 if (value == null)
+
                     value = string.Empty;
+
                 _text = value;
+
                 SetTextFieldText();
+
                 UpdateSize();
+
                 UpdateGear(6);
             }
         }
@@ -64,12 +76,17 @@ namespace FairyGUI
         virtual protected void SetTextFieldText()
         {
             string str = _text;
+
             if (_templateVars != null)
+
                 str = ParseTemplate(str);
 
             _textField.maxWidth = maxWidth;
+
             if (_ubbEnabled)
+
                 _textField.htmlText = UBBParser.inst.Parse(XMLUtils.EncodeString(str));
+
             else
                 _textField.text = str;
         }
@@ -126,9 +143,13 @@ namespace FairyGUI
         protected string ParseTemplate(string template)
         {
             int pos1 = 0, pos2 = 0;
+
             int pos3;
+
             string tag;
+
             string value;
+
             StringBuilder buffer = new StringBuilder();
 
             while ((pos2 = template.IndexOf('{', pos1)) != -1)
@@ -136,40 +157,55 @@ namespace FairyGUI
                 if (pos2 > 0 && template[pos2 - 1] == '\\')
                 {
                     buffer.Append(template, pos1, pos2 - pos1 - 1);
+
                     buffer.Append('{');
+
                     pos1 = pos2 + 1;
+
                     continue;
                 }
 
                 buffer.Append(template, pos1, pos2 - pos1);
+
                 pos1 = pos2;
+
                 pos2 = template.IndexOf('}', pos1);
+
                 if (pos2 == -1)
+
                     break;
 
                 if (pos2 == pos1 + 1)
                 {
                     buffer.Append(template, pos1, 2);
+
                     pos1 = pos2 + 1;
+
                     continue;
                 }
 
                 tag = template.Substring(pos1 + 1, pos2 - pos1 - 1);
+
                 pos3 = tag.IndexOf('=');
+
                 if (pos3 != -1)
                 {
                     if (!_templateVars.TryGetValue(tag.Substring(0, pos3), out value))
+
                         value = tag.Substring(pos3 + 1);
                 }
                 else
                 {
                     if (!_templateVars.TryGetValue(tag, out value))
+
                         value = "";
                 }
                 buffer.Append(value);
+
                 pos1 = pos2 + 1;
             }
             if (pos1 < template.Length)
+
                 buffer.Append(template, pos1, template.Length - pos1);
 
             return buffer.ToString();

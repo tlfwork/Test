@@ -23,7 +23,7 @@ namespace FairyGUI
         bool _shrinkOnly;
         bool _useResize;
         bool _updatingLayout;
-        PackageItem _contentItem;
+        PackageItem _packageItem;
         Action<NTexture> _reloadDelegate;
 
         MovieClip _content;
@@ -38,18 +38,26 @@ namespace FairyGUI
         public GLoader()
         {
             _url = string.Empty;
+
             _align = AlignType.Left;
+
             _verticalAlign = VertAlignType.Top;
+
             showErrorSign = true;
+
             _reloadDelegate = OnExternalReload;
         }
 
         override protected void CreateDisplayObject()
         {
             displayObject = new Container("GLoader");
+
             displayObject.gOwner = this;
+
             _content = new MovieClip();
+
             ((Container)displayObject).AddChild(_content);
+
             ((Container)displayObject).opaque = true;
         }
 
@@ -59,7 +67,7 @@ namespace FairyGUI
 
             if (_content.texture != null)
             {
-                if (_contentItem == null)
+                if (_packageItem == null)
                 {
                     _content.texture.onSizeChanged -= _reloadDelegate;
                     try
@@ -87,14 +95,19 @@ namespace FairyGUI
         public string url
         {
             get { return _url; }
+
             set
             {
                 if (_url == value)
+
                     return;
 
                 ClearContent();
+
                 _url = value;
+
                 LoadContent();
+
                 UpdateGear(7);
             }
         }
@@ -363,9 +376,11 @@ namespace FairyGUI
                 this.url = null;
 
                 _content.texture = value;
+
                 if (value != null)
                 {
                     sourceWidth = value.width;
+
                     sourceHeight = value.height;
                 }
                 else
@@ -400,6 +415,7 @@ namespace FairyGUI
                 return;
 
             if (_url.StartsWith(UIPackage.URL_PREFIX))
+
                 LoadFromPackage(_url);
             else
                 LoadExternal();
@@ -407,36 +423,46 @@ namespace FairyGUI
 
         protected void LoadFromPackage(string itemURL)
         {
-            _contentItem = UIPackage.GetItemByURL(itemURL);
+            _packageItem = UIPackage.GetItemByURL(itemURL);
 
-            if (_contentItem != null)
+            if (_packageItem != null)
             {
-                _contentItem = _contentItem.getBranch();
-                sourceWidth = _contentItem.width;
-                sourceHeight = _contentItem.height;
-                _contentItem = _contentItem.getHighResolution();
-                _contentItem.Load();
+                _packageItem = _packageItem.getBranch();
 
-                if (_contentItem.type == PackageItemType.Image)
+                sourceWidth = _packageItem.width;
+
+                sourceHeight = _packageItem.height;
+
+                _packageItem = _packageItem.getHighResolution();
+
+                _packageItem.Load();
+
+                if (_packageItem.type == PackageItemType.Image)
                 {
-                    _content.texture = _contentItem.texture;
-                    _content.textureScale = new Vector2(_contentItem.width / (float)sourceWidth, _contentItem.height / (float)sourceHeight);
-                    _content.scale9Grid = _contentItem.scale9Grid;
-                    _content.scaleByTile = _contentItem.scaleByTile;
-                    _content.tileGridIndice = _contentItem.tileGridIndice;
+                    _content.texture = _packageItem.texture;
+
+                    _content.textureScale = new Vector2(_packageItem.width / (float)sourceWidth, _packageItem.height / (float)sourceHeight);
+
+                    _content.scale9Grid = _packageItem.scale9Grid;
+
+                    _content.scaleByTile = _packageItem.scaleByTile;
+
+                    _content.tileGridIndice = _packageItem.tileGridIndice;
 
                     UpdateLayout();
                 }
-                else if (_contentItem.type == PackageItemType.MovieClip)
+
+                else if (_packageItem.type == PackageItemType.MovieClip)
                 {
-                    _content.interval = _contentItem.interval;
-                    _content.swing = _contentItem.swing;
-                    _content.repeatDelay = _contentItem.repeatDelay;
-                    _content.frames = _contentItem.frames;
+                    _content.interval = _packageItem.interval;
+                    _content.swing = _packageItem.swing;
+                    _content.repeatDelay = _packageItem.repeatDelay;
+                    _content.frames = _packageItem.frames;
 
                     UpdateLayout();
                 }
-                else if (_contentItem.type == PackageItemType.Component)
+
+                else if (_packageItem.type == PackageItemType.Component)
                 {
                     GObject obj = UIPackage.CreateObjectFromURL(itemURL);
                     if (obj == null)
@@ -453,16 +479,18 @@ namespace FairyGUI
                         UpdateLayout();
                     }
                 }
+
                 else
                 {
                     if (_autoSize)
-                        this.SetSize(_contentItem.width, _contentItem.height);
+                        this.SetSize(_packageItem.width, _packageItem.height);
 
                     SetErrorState();
 
-                    Debug.LogWarning("Unsupported type of GLoader: " + _contentItem.type);
+                    Debug.LogWarning("Unsupported type of GLoader: " + _packageItem.type);
                 }
             }
+
             else
                 SetErrorState();
         }
@@ -672,7 +700,7 @@ namespace FairyGUI
 
             if (_content.texture != null)
             {
-                if (_contentItem == null)
+                if (_packageItem == null)
                 {
                     _content.texture.onSizeChanged -= _reloadDelegate;
                     FreeExternal(_content.texture);
@@ -686,7 +714,7 @@ namespace FairyGUI
                 _content2.Dispose();
                 _content2 = null;
             }
-            _contentItem = null;
+            _packageItem = null;
         }
 
         override protected void HandleSizeChanged()

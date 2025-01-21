@@ -14,15 +14,17 @@ namespace FairyGUI
         /// </summary>
         public RichTextField richTextField { get; private set; }
 
-        public GRichTextField()
-            : base()
+        public GRichTextField() : base()
         {
+
         }
 
         override protected void CreateDisplayObject()
         {
             richTextField = new RichTextField();
+
             richTextField.gOwner = this;
+
             displayObject = richTextField;
 
             _textField = richTextField.textField;

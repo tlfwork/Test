@@ -31,13 +31,17 @@ namespace FairyGUI
         public RichTextField()
         {
             gameObject.name = "RichTextField";
+
             this.opaque = true;
 
             htmlPageContext = HtmlPageContext.inst;
+
             htmlParseOptions = new HtmlParseOptions();
 
             this.textField = new TextField();
+
             textField.EnableRichSupport(this);
+
             AddChild(textField);
         }
 

@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 2464126938
+CRC: 548342101
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: b5908ddd7bba13735813faee392fc311
+    Hash: 580a432bad35a047c13e2e194b421318
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 134b7874faf1e4f485ed3c5a681e862b
+    Hash: cce081c9a91ac321d385fd7d62c9aef6
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: b5908ddd7bba13735813faee392fc311
+    Hash: 580a432bad35a047c13e2e194b421318
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -24,8 +24,18 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 43
   Script: {instanceID: 0}
+- Class: 90
+  Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+- Class: 95
+  Script: {instanceID: 0}
+- Class: 137
+  Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
+- Assets/Res/Model/Prefab/HumanOne.prefab
 - Assets/Res/Model/Prefab/RoleOne.prefab
 Dependencies:
+- D:/UnityWork/Test/Bundles/StandaloneWindows64/FirstPackage/OutputCache/firstpackage_assets_res_model_anim.bundle
 - D:/UnityWork/Test/Bundles/StandaloneWindows64/FirstPackage/OutputCache/firstpackage_assets_res_model_mesh.bundle

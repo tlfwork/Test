@@ -129,7 +129,7 @@ namespace FairyGUI
 
         class AtlasSprite
         {
-            public PackageItem atlas;
+            public PackageItem package_atlas;
 
             public Rect rect = new Rect();
 
@@ -1054,7 +1054,7 @@ namespace FairyGUI
 
                 AtlasSprite sprite = new AtlasSprite();
 
-                sprite.atlas = pi;
+                sprite.package_atlas = pi;
 
                 sprite.rect.x = buffer.ReadInt();
 
@@ -1462,21 +1462,21 @@ namespace FairyGUI
 
             if (_sprites.TryGetValue(item.id, out sprite))
             {
-                NTexture atlas = (NTexture)GetItemAsset(sprite.atlas);
+                NTexture ntexture = (NTexture)GetItemAsset(sprite.package_atlas);
 
-                if (atlas.width == sprite.rect.width && atlas.height == sprite.rect.height)
+                //           1024                 100                   524                 100
+                if (ntexture.width == sprite.rect.width && ntexture.height == sprite.rect.height)
 
-                    item.texture = atlas;
+                    item.texture = ntexture;
 
-                else
-                    item.texture = new NTexture(atlas, sprite.rect, sprite.rotated, sprite.originalSize, sprite.offset);
+                else// x:302.00, y:189.00, width:100.00, height:100.00         false       100.00, 100.00           0, 0
+                    item.texture = new NTexture(ntexture, sprite.rect, sprite.rotated, sprite.originalSize, sprite.offset);
             }
 
             else
                 item.texture = NTexture.Empty;
         }
 
-        //item是atlas
         void LoadAtlas(PackageItem item)
         {
             string ext = Path.GetExtension(item.file);
@@ -1675,7 +1675,7 @@ namespace FairyGUI
 
                 if (spriteId != null && _sprites.TryGetValue(spriteId, out sprite))
                 {
-                    frame.texture = new NTexture((NTexture)GetItemAsset(sprite.atlas), sprite.rect, sprite.rotated,
+                    frame.texture = new NTexture((NTexture)GetItemAsset(sprite.package_atlas), sprite.rect, sprite.rotated,
                         new Vector2(item.width, item.height), frameRect.position);
                 }
                 item.frames[i] = frame;
@@ -1712,7 +1712,7 @@ namespace FairyGUI
             AtlasSprite mainSprite = null;
             if (ttf && _sprites.TryGetValue(item.id, out mainSprite))
             {
-                mainTexture = (NTexture)GetItemAsset(mainSprite.atlas);
+                mainTexture = (NTexture)GetItemAsset(mainSprite.package_atlas);
                 texScaleX = mainTexture.root.uvRect.width / mainTexture.width;
                 texScaleY = mainTexture.root.uvRect.height / mainTexture.height;
             }

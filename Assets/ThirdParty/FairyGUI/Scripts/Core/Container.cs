@@ -194,6 +194,7 @@ namespace FairyGUI
 
                             Stage.inst._OnFocusRemoving(this);
                     }
+
                     else
                     {
                         child.DispatchEvent("onRemovedFromStage", null);
@@ -203,6 +204,7 @@ namespace FairyGUI
                             Stage.inst._OnFocusRemoving(this);
                     }
                 }
+
                 _children.Remove(child);
 
                 InvalidateBatchingState(true);

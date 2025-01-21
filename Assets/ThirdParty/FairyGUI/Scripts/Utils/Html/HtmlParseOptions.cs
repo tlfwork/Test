@@ -57,8 +57,11 @@ namespace FairyGUI.Utils
         public HtmlParseOptions()
         {
             linkUnderline = DefaultLinkUnderline;
+
             linkColor = DefaultLinkColor;
+
             linkBgColor = DefaultLinkBgColor;
+
             linkHoverBgColor = DefaultLinkHoverBgColor;
         }
     }

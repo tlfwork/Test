@@ -1546,9 +1546,11 @@ namespace FairyGUI
         internal Transform CreatePoolManager(string name)
         {
             GameObject go = new GameObject("[" + name + "]");
+
             go.SetActive(false);
 
             Transform t = go.transform;
+
             t.SetParent(cachedTransform, false);
 
             return t;

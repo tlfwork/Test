@@ -90,6 +90,7 @@ namespace FairyGUI
 
                     _texture = value;
 
+                    // 0
                     if (_customMatarial != 0 && _material != null)
 
                         _material.mainTexture = _texture != null ? _texture.nativeTexture : null;
@@ -379,6 +380,7 @@ namespace FairyGUI
 
                     material.shaderKeywords = _shaderKeywords;
             }
+
             else if (_shaderKeywords != null && _manager != null)
 
                 _materialFlags = _manager.GetFlagsByKeywords(_shaderKeywords);
@@ -513,9 +515,11 @@ namespace FairyGUI
         public bool UpdateMesh()
         {
             bool ret = false;
+
             if (_meshDirty)
             {
                 UpdateMeshNow();
+
                 ret = true;
             }
 
@@ -619,14 +623,14 @@ namespace FairyGUI
 
                     else
                     {
-                        int matFlags = _materialFlags;
+                        int matFlags = _materialFlags;//0
 
-                        if (grayed)
+                        if (grayed)//false
                         {
                             matFlags |= (int)MaterialFlags.Grayed;
                         }
 
-                        if (context.clipped)
+                        if (context.clipped)//false
                         {
                             if (context.stencilReferenceValue > 0)
 
@@ -722,37 +726,50 @@ namespace FairyGUI
                     mesh.Clear();
 
                     if (meshModifier != null)
+
                         meshModifier();
                 }
                 return;
             }
 
             VertexBuffer vb = VertexBuffer.Begin();
+
             vb.contentRect = _contentRect;
+
             vb.uvRect = _texture.uvRect;
+
             if (_texture != null)
+
                 vb.textureSize = new Vector2(_texture.width, _texture.height);
             else
                 vb.textureSize = new Vector2(0, 0);
+
             if (_flip != FlipType.None)
             {
                 if (_flip == FlipType.Horizontal || _flip == FlipType.Both)
                 {
                     float tmp = vb.uvRect.xMin;
+
                     vb.uvRect.xMin = vb.uvRect.xMax;
+
                     vb.uvRect.xMax = tmp;
                 }
                 if (_flip == FlipType.Vertical || _flip == FlipType.Both)
                 {
                     float tmp = vb.uvRect.yMin;
+
                     vb.uvRect.yMin = vb.uvRect.yMax;
+
                     vb.uvRect.yMax = tmp;
                 }
             }
+
             vb.vertexColor = _color;
+
             _meshFactory.OnPopulateMesh(vb);
 
             int vertCount = vb.currentVertCount;
+
             if (vertCount == 0)
             {
                 if (mesh.vertexCount > 0)
@@ -760,50 +777,69 @@ namespace FairyGUI
                     mesh.Clear();
 
                     if (meshModifier != null)
+
                         meshModifier();
                 }
+
                 vb.End();
+
                 return;
             }
 
             if (_texture.rotated)
             {
                 float xMin = _texture.uvRect.xMin;
+
                 float yMin = _texture.uvRect.yMin;
+
                 float yMax = _texture.uvRect.yMax;
+
                 float tmp;
+
                 for (int i = 0; i < vertCount; i++)
                 {
                     Vector2 vec = vb.uvs[i];
+
                     tmp = vec.y;
+
                     vec.y = yMin + vec.x - xMin;
+
                     vec.x = xMin + yMax - tmp;
+
                     vb.uvs[i] = vec;
                 }
             }
 
             hasAlphaBackup = vb._alphaInVertexColor;
+
             if (hasAlphaBackup)
             {
                 if (_alphaBackup == null)
+
                     _alphaBackup = new List<byte>();
                 else
                     _alphaBackup.Clear();
+
                 for (int i = 0; i < vertCount; i++)
                 {
                     Color32 col = vb.colors[i];
+
                     _alphaBackup.Add(col.a);
 
                     col.a = (byte)(col.a * _alpha);
+
                     vb.colors[i] = col;
                 }
             }
+
             else if (_alpha != 1)
             {
                 for (int i = 0; i < vertCount; i++)
                 {
                     Color32 col = vb.colors[i];
+
                     col.a = (byte)(col.a * _alpha);
+
                     vb.colors[i] = col;
                 }
             }
@@ -811,17 +847,27 @@ namespace FairyGUI
             if (_vertexMatrix != null)
             {
                 Vector3 camPos = _vertexMatrix.cameraPos;
+
                 Vector3 center = new Vector3(camPos.x, camPos.y, 0);
+
                 center -= _vertexMatrix.matrix.MultiplyPoint(center);
+
                 for (int i = 0; i < vertCount; i++)
                 {
                     Vector3 pt = vb.vertices[i];
+
                     pt = _vertexMatrix.matrix.MultiplyPoint(pt);
+
                     pt += center;
+
                     Vector3 vec = pt - camPos;
+
                     float lambda = -camPos.z / vec.z;
+
                     pt.x = camPos.x + lambda * vec.x;
+
                     pt.y = camPos.y + lambda * vec.y;
+
                     pt.z = 0;
 
                     vb.vertices[i] = pt;
@@ -829,18 +875,27 @@ namespace FairyGUI
             }
 
             mesh.Clear();
+
             mesh.SetVertices(vb.vertices);
+
             if (vb._isArbitraryQuad)
+
                 mesh.SetUVs(0, vb.FixUVForArbitraryQuad());
             else
                 mesh.SetUVs(0, vb.uvs);
+
             mesh.SetColors(vb.colors);
+
             mesh.SetTriangles(vb.triangles, 0);
+
             if (vb.uvs2.Count == vb.uvs.Count)
+
                 mesh.SetUVs(1, vb.uvs2);
+
             vb.End();
 
             if (meshModifier != null)
+
                 meshModifier();
         }
 

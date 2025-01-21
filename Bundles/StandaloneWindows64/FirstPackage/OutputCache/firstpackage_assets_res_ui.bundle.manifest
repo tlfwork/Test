@@ -1,26 +1,23 @@
 ManifestFileVersion: 0
-CRC: 1606949192
+CRC: 3449561444
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 4412440a753664b1c49d88cdd57befaa
+    Hash: 3a2f192e042b47ed9278fd7791e6a3f2
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 1bba0c91ece13f075040cc62060b6ba4
+    Hash: deaf5b7fe83e1a31de382f7fed810e72
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 4412440a753664b1c49d88cdd57befaa
+    Hash: 3a2f192e042b47ed9278fd7791e6a3f2
 HashAppended: 0
 ClassTypes:
 - Class: 28
   Script: {instanceID: 0}
 - Class: 49
   Script: {instanceID: 0}
-- Class: 213
-  Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/Res/UI/MyBag_fui.bytes
 - Assets/Res/UI/MyBag_atlas0.png
-- Assets/Res/UI/dragon.jpg
 Dependencies: []

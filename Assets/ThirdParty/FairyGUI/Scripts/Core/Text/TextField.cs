@@ -70,9 +70,11 @@ namespace FairyGUI
         internal void EnableRichSupport(RichTextField richTextField)
         {
             _richTextField = richTextField;
+
             if (richTextField is InputTextField)
             {
                 _input = true;
+
                 EnableCharPositionSupport();
             }
         }
@@ -782,13 +784,17 @@ namespace FairyGUI
                         if (_richTextField != null && htmlObject == null)
                         {
                             element.space = (int)(rectWidth - line.width - 4);
+
                             htmlObject = _richTextField.htmlPageContext.CreateObject(_richTextField, element);
+
                             element.htmlObject = htmlObject;
                         }
                         if (htmlObject != null)
                         {
                             glyphWidth = htmlObject.width + 2;
+
                             glyphHeight = htmlObject.height;
+
                             baseline = glyphHeight * IMAGE_BASELINE;
                         }
 
@@ -797,7 +803,9 @@ namespace FairyGUI
                     }
 
                     elementIndex++;
+
                     if (elementIndex < elementCount)
+
                         element = _elements[elementIndex];
                     else
                         element = null;
@@ -810,6 +818,7 @@ namespace FairyGUI
                 else if (_font.GetGlyph(ch == '\t' ? ' ' : ch, out glyphWidth, out glyphHeight, out baseline))
                 {
                     if (ch == '\t')
+
                         glyphWidth *= 4;
 
                     if (wordPossible)
@@ -833,14 +842,17 @@ namespace FairyGUI
                     else if (char.IsWhiteSpace(ch))
                     {
                         wordLen = 0;
+
                         wordPossible = true;
                     }
                     else if (format.specialStyle == TextFormat.SpecialStyle.Subscript
+
                         || format.specialStyle == TextFormat.SpecialStyle.Superscript)
                     {
                         if (sLineChars.Count > 0)
                         {
                             wordLen = 2; //避免上标和下标折到下一行
+
                             wordPossible = true;
                         }
                     }
@@ -851,10 +863,13 @@ namespace FairyGUI
                     wordPossible = false;
 
                 sLineChars.Add(new LineCharInfo() { width = glyphWidth, height = glyphHeight, baseline = baseline });
+                
                 if (glyphWidth != 0)
                 {
                     if (posx != 0)
+
                         posx += letterSpacing;
+
                     posx += glyphWidth;
                 }
 
@@ -863,19 +878,29 @@ namespace FairyGUI
                     UpdateLineInfo(line, letterSpacing, sLineChars.Count);
 
                     LineInfo newLine = LineInfo.Borrow();
+
                     _lines.Add(newLine);
+
                     newLine.y = line.y + (line.height + lineSpacing);
+
                     if (newLine.y < GUTTER_Y) //lineSpacing maybe negative
+
                         newLine.y = GUTTER_Y;
+
                     newLine.y2 = newLine.y;
+
                     newLine.charIndex = line.charIndex + line.charCount;
 
                     if (checkEdge && line.y + line.height < rectHeight)
+
                         _ellipsisCharIndex = line.charIndex + Math.Max(0, line.charCount - ELLIPSIS_LENGTH);
 
                     sLineChars.Clear();
+
                     wordPossible = false;
+
                     posx = 0;
+
                     line = newLine;
                 }
                 else if (posx > rectWidth)
@@ -883,37 +908,51 @@ namespace FairyGUI
                     if (wrap)
                     {
                         int lineCharCount = sLineChars.Count;
+
                         int toMoveChars;
 
                         if (wordPossible && wordLen < 20 && lineCharCount > 2) //if word had broken, move word to new line
                         {
                             toMoveChars = wordLen;
+
                             //we caculate the line width WITHOUT the tailing space
                             UpdateLineInfo(line, letterSpacing, lineCharCount - (toMoveChars + 1));
+
                             line.charCount++; //but keep it in this line.
                         }
                         else
                         {
                             toMoveChars = lineCharCount > 1 ? 1 : 0; //if only one char here, we cant move it to new line
+                            
                             UpdateLineInfo(line, letterSpacing, lineCharCount - toMoveChars);
                         }
 
                         LineInfo newLine = LineInfo.Borrow();
+
                         _lines.Add(newLine);
+
                         newLine.y = line.y + (line.height + lineSpacing);
+
                         if (newLine.y < GUTTER_Y)
+
                             newLine.y = GUTTER_Y;
+
                         newLine.y2 = newLine.y;
+
                         newLine.charIndex = line.charIndex + line.charCount;
 
                         posx = 0;
+
                         if (toMoveChars != 0)
                         {
                             for (int i = line.charCount; i < lineCharCount; i++)
                             {
                                 LineCharInfo ci = sLineChars[i];
+
                                 if (posx != 0)
+
                                     posx += letterSpacing;
+
                                 posx += ci.width;
                             }
 
@@ -923,12 +962,15 @@ namespace FairyGUI
                             sLineChars.Clear();
 
                         if (checkEdge && line.y + line.height < rectHeight)
+
                             _ellipsisCharIndex = line.charIndex + Math.Max(0, line.charCount - ELLIPSIS_LENGTH);
 
                         wordPossible = false;
+
                         line = newLine;
                     }
                     else if (checkEdge && _ellipsisCharIndex == -1)
+
                         _ellipsisCharIndex = line.charIndex + Math.Max(0, sLineChars.Count - ELLIPSIS_LENGTH - 1);
                 }
             }
@@ -936,18 +978,25 @@ namespace FairyGUI
             UpdateLineInfo(line, letterSpacing, sLineChars.Count);
 
             if (_textWidth > 0)
+
                 _textWidth += GUTTER_X * 2;
+
             _textHeight = line.y + line.height + GUTTER_Y;
 
             if (checkEdge && _textWidth <= _contentRect.width && _textHeight <= _contentRect.height + GUTTER_Y)
+                
                 _ellipsisCharIndex = -1;
 
             if (checkEdge)
+
                 _font.GetGlyph('…', out glyphWidth, out glyphHeight, out baseline);
+
             if (hasLine)
+
                 _font.GetGlyph('_', out glyphWidth, out glyphHeight, out baseline);
 
             _textWidth = Mathf.RoundToInt(_textWidth);
+
             _textHeight = Mathf.RoundToInt(_textHeight);
         }
 

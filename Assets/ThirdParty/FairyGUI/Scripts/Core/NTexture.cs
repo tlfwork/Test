@@ -55,7 +55,7 @@ namespace FairyGUI
 
         Vector2 _originalSize;
 
-        NTexture _root; //this
+        NTexture _root; 
 
         Dictionary<string, MaterialManager> _materialManagers;
 
@@ -118,6 +118,7 @@ namespace FairyGUI
         {
         }
 
+        //Atals走这里  tex null 1 1
         public NTexture(Texture texture, Texture alphaTexture, float xScale, float yScale)
         {
             _root = this;
@@ -194,11 +195,13 @@ namespace FairyGUI
 
                 uvRect.height = tmp;
             }
+
             _region = region;
 
             _originalSize = _region.size;
         }
 
+        //img 走这里 x:302.00, y:189.00, width:100.00, height:100.00   false       100.00, 100.00      0, 0
         public NTexture(NTexture root, Rect region, bool rotated, Vector2 originalSize, Vector2 offset)
 
             : this(root, region, rotated)

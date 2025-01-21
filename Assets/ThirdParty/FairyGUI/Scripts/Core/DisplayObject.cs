@@ -1055,16 +1055,20 @@ namespace FairyGUI
             if ((_flags & Flags.GameObjectDisposed) != 0)
             {
                 DisplayDisposedWarning();
+
                 return;
             }
 
             _renderingOrder = context.renderingOrder + 1;
+
             if (graphics != null)
+
                 graphics.SetRenderingOrder(context, inBatch);
             else
                 context.renderingOrder++;
 
             if (_paintingMode > 0)
+
                 paintingGraphics.renderingOrder = _renderingOrder;
         }
 

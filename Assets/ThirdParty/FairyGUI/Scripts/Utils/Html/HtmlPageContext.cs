@@ -9,9 +9,13 @@ namespace FairyGUI.Utils
     public class HtmlPageContext : IHtmlPageContext
     {
         Stack<IHtmlObject> _imagePool;
+
         Stack<IHtmlObject> _inputPool;
+
         Stack<IHtmlObject> _buttonPool;
+
         Stack<IHtmlObject> _selectPool;
+
         Stack<IHtmlObject> _linkPool;
 
         static HtmlPageContext _inst;
@@ -21,7 +25,9 @@ namespace FairyGUI.Utils
             get
             {
                 if (_inst == null)
+
                     _inst = new HtmlPageContext();
+
                 return _inst;
             }
         }
@@ -33,6 +39,7 @@ namespace FairyGUI.Utils
         static void InitializeOnLoad()
         {
             _inst = null;
+
             _poolManager = null;
         }
 #endif
@@ -40,29 +47,39 @@ namespace FairyGUI.Utils
         public HtmlPageContext()
         {
             _imagePool = new Stack<IHtmlObject>();
+
             _inputPool = new Stack<IHtmlObject>();
+
             _buttonPool = new Stack<IHtmlObject>();
+
             _selectPool = new Stack<IHtmlObject>();
+
             _linkPool = new Stack<IHtmlObject>();
 
             if (Application.isPlaying && _poolManager == null)
+
                 _poolManager = Stage.inst.CreatePoolManager("HtmlObjectPool");
         }
 
         virtual public IHtmlObject CreateObject(RichTextField owner, HtmlElement element)
         {
             IHtmlObject ret = null;
+
             bool fromPool = false;
+
             if (element.type == HtmlElementType.Image)
             {
                 if (_imagePool.Count > 0 && _poolManager != null)
                 {
                     ret = _imagePool.Pop();
+
                     fromPool = true;
                 }
+
                 else
                     ret = new HtmlImage();
             }
+
             else if (element.type == HtmlElementType.Link)
             {
                 if (_linkPool.Count > 0 && _poolManager != null)
@@ -73,6 +90,7 @@ namespace FairyGUI.Utils
                 else
                     ret = new HtmlLink();
             }
+
             else if (element.type == HtmlElementType.Input)
             {
                 string type = element.GetString("type");
@@ -104,6 +122,7 @@ namespace FairyGUI.Utils
                         ret = new HtmlInput();
                 }
             }
+
             else if (element.type == HtmlElementType.Select)
             {
                 if (_selectPool.Count > 0 && _poolManager != null)
@@ -127,11 +146,15 @@ namespace FairyGUI.Utils
                 if (fromPool && ret.displayObject != null && ret.displayObject.isDisposed)
                 {
                     ret.Dispose();
+
                     return CreateObject(owner, element);
 
                 }
+
                 ret.Create(owner, element);
+
                 if (ret.displayObject != null)
+
                     ret.displayObject.home = owner.cachedTransform;
             }
 

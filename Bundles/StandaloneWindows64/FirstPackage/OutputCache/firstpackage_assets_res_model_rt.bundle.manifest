@@ -1,0 +1,38 @@
+ManifestFileVersion: 0
+CRC: 4041631921
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: c93afc4d06bd2ba076cec7b2ecb0d535
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: ce79dcdb76325a618d12617bafeee21f
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: c93afc4d06bd2ba076cec7b2ecb0d535
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 20
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 90
+  Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+- Class: 95
+  Script: {instanceID: 0}
+- Class: 137
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Res/Model/RT/RTStudio.prefab
+Dependencies:
+- D:/UnityWork/Test/Bundles/StandaloneWindows64/FirstPackage/OutputCache/firstpackage_assets_res_model_anim.bundle
+- D:/UnityWork/Test/Bundles/StandaloneWindows64/FirstPackage/OutputCache/firstpackage_assets_res_model_mesh.bundle

@@ -12,14 +12,19 @@ namespace FairyGUI.Utils
         public GLoader loader { get; private set; }
 
         RichTextField _owner;
+
         HtmlElement _element;
+
         bool _externalTexture;
 
         public HtmlImage()
         {
             loader = (GLoader)UIObjectFactory.NewObject(ObjectType.Loader);
+
             loader.gameObjectName = "HtmlImage";
+
             loader.fill = FillType.ScaleFree;
+
             loader.touchable = false;
         }
 
@@ -46,43 +51,59 @@ namespace FairyGUI.Utils
         public void Create(RichTextField owner, HtmlElement element)
         {
             _owner = owner;
+
             _element = element;
 
             int sourceWidth = 0;
+
             int sourceHeight = 0;
+
             NTexture texture = owner.htmlPageContext.GetImageTexture(this);
+
             if (texture != null)
             {
                 sourceWidth = texture.width;
+
                 sourceHeight = texture.height;
 
                 loader.texture = texture;
+
                 _externalTexture = true;
             }
+
             else
             {
                 string src = element.GetString("src");
+
                 if (src != null)
                 {
                     PackageItem pi = UIPackage.GetItemByURL(src);
+
                     if (pi != null)
                     {
                         sourceWidth = pi.width;
+
                         sourceHeight = pi.height;
                     }
                 }
 
                 loader.url = src;
+
                 _externalTexture = false;
             }
 
             int width = element.GetInt("width", sourceWidth);
+
             int height = element.GetInt("height", sourceHeight);
 
             if (width == 0)
+
                 width = 5;
+
             if (height == 0)
+
                 height = 10;
+
             loader.SetSize(width, height);
         }
 

@@ -128,12 +128,12 @@ public class StartRun : MonoBehaviour
     {
         public string GetRemoteFallbackURL(string fileName)
         {
-            return $"http://mypanda/Res/v1/{fileName}";
+            return $"http://mypanda/Res/2025-01-21-1280/{fileName}";
         }
 
         public string GetRemoteMainURL(string fileName)
         {
-            return $"http://mypanda/Res/v1/{fileName}";
+            return $"http://mypanda/Res/2025-01-21-1280/{fileName}";
         }
     }
 
@@ -163,17 +163,6 @@ public class StartRun : MonoBehaviour
         MethodInfo method = type.GetMethod("Start");
 
         method.Invoke(null,new object[] { dllMode.GetHashCode()});
-    }
-
-    public object LoadPackageXML(string name, string extension, Type type, out DestroyMethod destroyMethod)
-    {
-        destroyMethod = DestroyMethod.None;
-
-        ResourcePackage package = YooAssets.GetPackage("FirstPackage");
-
-        AssetHandle assetHandle = package.LoadAssetSync(name);
-
-        return assetHandle.AssetObject;
     }
 }
 
