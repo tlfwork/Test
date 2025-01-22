@@ -1064,6 +1064,7 @@ namespace FairyGUI
             if (graphics != null)
 
                 graphics.SetRenderingOrder(context, inBatch);
+
             else
                 context.renderingOrder++;
 

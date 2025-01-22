@@ -4,6 +4,7 @@ using System.Collections.Generic;
 namespace FairyGUI
 {
     public delegate void EventCallback0();
+
     public delegate void EventCallback1(EventContext context);
 
     /// <summary>
@@ -11,6 +12,7 @@ namespace FairyGUI
     /// </summary>
     public class EventDispatcher : IEventDispatcher
     {
+        // "onClick"
         Dictionary<string, EventBridge> _dic;
 
         public EventDispatcher()
@@ -130,7 +132,9 @@ namespace FairyGUI
         public bool hasEventListeners(string strType)
         {
             EventBridge bridge = TryGetEventBridge(strType);
+
             if (bridge == null)
+
                 return false;
 
             return !bridge.isEmpty;
@@ -163,14 +167,18 @@ namespace FairyGUI
         internal EventBridge GetEventBridge(string strType)
         {
             if (_dic == null)
+
                 _dic = new Dictionary<string, EventBridge>();
 
             EventBridge bridge = null;
+
             if (!_dic.TryGetValue(strType, out bridge))
             {
                 bridge = new EventBridge(this);
+
                 _dic[strType] = bridge;
             }
+
             return bridge;
         }
 

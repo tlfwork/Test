@@ -71,12 +71,12 @@ MonoBehaviour:
         FilterRuleName: CollectAll
         AssetTags: 
         UserData: 
-    - GroupName: uiatlas
+    - GroupName: Font
       GroupDesc: "\u56FE\u6807"
       AssetTags: 
       ActiveRuleName: EnableGroup
       Collectors:
-      - CollectPath: Assets/Res/UIAtlas
+      - CollectPath: Assets/Res/Font
         CollectorGUID: 9c1e8113d181e5644adb56b6a71ebde8
         CollectorType: 0
         AddressRuleName: AddressByFileName

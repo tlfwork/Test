@@ -10,11 +10,13 @@ namespace FairyGUI
     public class EventListener
     {
         EventBridge _bridge;
+
         string _type;
 
         public EventListener(EventDispatcher owner, string type)
         {
             _bridge = owner.GetEventBridge(type);
+
             _type = type;
         }
 

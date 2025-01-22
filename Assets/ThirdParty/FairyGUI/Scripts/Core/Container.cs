@@ -391,27 +391,39 @@ namespace FairyGUI
             if (StageCamera.main == null)
             {
                 if (this is Stage)
+
                     return this;
                 else
                     return null;
             }
 
             HitTestContext.screenPoint = new Vector3(stagePoint.x, Screen.height - stagePoint.y, 0);
+
             if (Display.displays.Length > 1)
             {
                 Vector3 p = Display.RelativeMouseAt(HitTestContext.screenPoint);
+
                 if (p.x != 0 || p.y != 0) //(p != Vector3.zero) we got (0,0,1) in some unity version, especially on recovering from sleep
+                    
                     HitTestContext.screenPoint = p;
             }
+
             HitTestContext.worldPoint = StageCamera.main.ScreenToWorldPoint(HitTestContext.screenPoint);
+
             HitTestContext.direction = Vector3.back;
+
             HitTestContext.forTouch = forTouch;
+
             HitTestContext.camera = StageCamera.main;
 
             DisplayObject ret = HitTest();
+
             if (ret != null)
+
                 return ret;
+
             else if (this is Stage)
+
                 return this;
             else
                 return null;
@@ -420,49 +432,66 @@ namespace FairyGUI
         override protected DisplayObject HitTest()
         {
             if ((_flags & Flags.UserGameObject) != 0 && !gameObject.activeInHierarchy)
+
                 return null;
 
             if (this.cachedTransform.localScale.x == 0 || this.cachedTransform.localScale.y == 0)
+
                 return null;
 
             Camera savedCamera = HitTestContext.camera;
+
             Vector3 savedWorldPoint = HitTestContext.worldPoint;
+
             Vector3 savedDirection = HitTestContext.direction;
+
             DisplayObject target;
 
             if (renderMode != RenderMode.ScreenSpaceOverlay || (_flags & Flags.UserGameObject) != 0)
             {
                 Camera cam = GetRenderCamera();
+
                 if (cam.targetDisplay != HitTestContext.screenPoint.z)
+
                     return null;
 
                 HitTestContext.camera = cam;
+
                 if (renderMode == RenderMode.WorldSpace)
                 {
                     Vector3 screenPoint = HitTestContext.camera.WorldToScreenPoint(this.cachedTransform.position); //only for query z value
+                    
                     screenPoint.x = HitTestContext.screenPoint.x;
+                    
                     screenPoint.y = HitTestContext.screenPoint.y;
 
                     //获得本地z轴在世界坐标的方向
                     HitTestContext.worldPoint = HitTestContext.camera.ScreenToWorldPoint(screenPoint);
+
                     Ray ray = HitTestContext.camera.ScreenPointToRay(screenPoint);
+
                     HitTestContext.direction = Vector3.zero - ray.direction;
                 }
+
                 else if (renderMode == RenderMode.ScreenSpaceCamera)
                 {
                     HitTestContext.worldPoint = HitTestContext.camera.ScreenToWorldPoint(HitTestContext.screenPoint);
                 }
             }
+
             else
             {
                 if (HitTestContext.camera.targetDisplay != HitTestContext.screenPoint.z && !(this is Stage))
+
                     return null;
             }
 
             target = HitTest_Container();
 
             HitTestContext.camera = savedCamera;
+
             HitTestContext.worldPoint = savedWorldPoint;
+
             HitTestContext.direction = savedDirection;
 
             return target;
@@ -471,27 +500,35 @@ namespace FairyGUI
         DisplayObject HitTest_Container()
         {
             Vector2 localPoint = WorldToLocal(HitTestContext.worldPoint, HitTestContext.direction);
+
             if (_vertexMatrix != null)
+
                 HitTestContext.worldPoint = this.cachedTransform.TransformPoint(new Vector2(localPoint.x, -localPoint.y));
 
             if (hitArea != null)
             {
                 if (!hitArea.HitTest(_contentRect, localPoint))
+
                     return null;
 
                 if (hitArea is MeshColliderHitTest)
+
                     localPoint = ((MeshColliderHitTest)hitArea).lastHit;
             }
+
             else
             {
                 if (_clipRect != null && !((Rect)_clipRect).Contains(localPoint))
+
                     return null;
             }
 
             if (_mask != null)
             {
                 DisplayObject tmp = _mask.InternalHitTestMask();
+
                 if (!reversedMask && tmp == null || reversedMask && tmp != null)
+
                     return null;
             }
 
@@ -500,6 +537,7 @@ namespace FairyGUI
             if (touchChildren)
             {
                 int count = _children.Count;
+
                 for (int i = count - 1; i >= 0; --i) // front to back!
                 {
                     DisplayObject child = _children[i];
@@ -524,6 +562,7 @@ namespace FairyGUI
             }
 
             if (target == null && opaque && (hitArea != null || _contentRect.Contains(localPoint)))
+
                 target = this;
 
             return target;

@@ -8,6 +8,7 @@ namespace FairyGUI
     public class StageEngine : MonoBehaviour
     {
         public int ObjectsOnStage;
+
         public int GraphicsOnStage;
 
         public static bool beingQuit;
@@ -22,6 +23,7 @@ namespace FairyGUI
             Stage.inst.InternalUpdate();
 
             ObjectsOnStage = Stats.ObjectCount;
+
             GraphicsOnStage = Stats.GraphicsCount;
         }
 
@@ -41,11 +43,14 @@ namespace FairyGUI
         }
 
 #if UNITY_2019_3_OR_NEWER
+
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+
         static void InitializeOnLoad()
         {
             beingQuit = false;
         }
+
 #endif
     }
 }

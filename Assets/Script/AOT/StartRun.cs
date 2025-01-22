@@ -128,12 +128,12 @@ public class StartRun : MonoBehaviour
     {
         public string GetRemoteFallbackURL(string fileName)
         {
-            return $"http://mypanda/Res/2025-01-21-1280/{fileName}";
+            return $"http://mypanda/Res/2025-01-22-1269/{fileName}";
         }
 
         public string GetRemoteMainURL(string fileName)
         {
-            return $"http://mypanda/Res/2025-01-21-1280/{fileName}";
+            return $"http://mypanda/Res/2025-01-22-1269/{fileName}";
         }
     }
 

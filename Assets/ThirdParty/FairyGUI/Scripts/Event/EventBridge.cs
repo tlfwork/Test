@@ -13,8 +13,11 @@ namespace FairyGUI
         public EventDispatcher owner;
 
         EventCallback0 _callback0;
+
         EventCallback1 _callback1;
+
         EventCallback1 _captureCallback;
+
         internal bool _dispatching;
 
         public EventBridge(EventDispatcher owner)
@@ -36,6 +39,7 @@ namespace FairyGUI
         public void Add(EventCallback1 callback)
         {
             _callback1 -= callback;
+
             _callback1 += callback;
         }
 
